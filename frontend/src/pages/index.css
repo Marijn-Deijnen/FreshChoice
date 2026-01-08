@@ -9,3 +9,26 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+h1 {
+  font-size: 32px;
+  font-weight: bolder;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+p {
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.5;
+  margin: 0;
+}
