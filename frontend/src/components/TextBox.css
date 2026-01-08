@@ -1,0 +1,31 @@
+.textbox {
+  font-family: "Arial", sans-serif;
+  background: #ffffff;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  height: 40px;
+  outline: none;
+  padding: 8px;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.textbox.small {
+  width: 120px;
+}
+
+.textbox.medium {
+  width: 200px;
+}
+
+.textbox.large {
+  width: 300px;
+}
+
+.textbox.multiline {
+  width: 300px;
+  resize: vertical;
+  min-height: 40px;
+}
