@@ -1,0 +1,11 @@
+.container {
+  font-family: "Arial", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
+}

@@ -14,7 +14,7 @@ const App = () => {
     case "levering":
       return <Levering setPage={setPage} />;
     default:
-      return <>Pagina niet gevonden</>;
+      return <p>Pagina niet gevonden</p>;
   }
 };
 
