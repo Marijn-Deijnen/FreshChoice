@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import SearchBox from "../components/SearchBox";
 import Separator from "../components/Separator";
 import Logo from "../components/Logo";
+import Table from "../components/Table";
 import "./index.css";
 
 const Voorraad = ({ setPage }) => {
@@ -19,6 +20,7 @@ const Voorraad = ({ setPage }) => {
         onChange={(e) => setTextValue(e.target.value)}
       />
       <Button onClick={() => setPage("home")} size="small" label="Terug" />
+    <Table />
     </div>
   );
 };
