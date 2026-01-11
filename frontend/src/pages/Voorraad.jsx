@@ -26,7 +26,6 @@ const Voorraad = ({ setPage }) => {
       <Separator variant="vertical" />
       <SearchBox size="big" value={textValue} onChange={(e) => setTextValue(e.target.value)}/>
       <Button onClick={() => setPage("home")} size="small" label="Terug" />
-      <Button type="button" label="Open model" onClick={() => setIsModalOpen(true)} />
     <Table>
   <thead>
     <tr>
