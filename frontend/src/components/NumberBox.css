@@ -1,0 +1,26 @@
+.numberbox {
+  font-family: "Arial", sans-serif;
+  background: #ffffff;
+  border: 1px solid #D9D9D9;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  height: 40px;
+  outline: none;
+  padding: 8px;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.numberbox.small {
+  width: 60px;
+}
+
+.numberbox.medium {
+  width: 80px;
+}
+
+.numberbox.large {
+  width: 100px;
+}
+

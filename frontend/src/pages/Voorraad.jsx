@@ -5,6 +5,7 @@ import Separator from "../components/Separator";
 import Logo from "../components/Logo";
 import Table from "../components/Table";
 import Textbox from "../components/TextBox";
+import NumberBox from "../components/NumberBox";
 import Modal from "../components/Modal2"
 import "./index.css";
 
@@ -67,7 +68,7 @@ const Voorraad = ({ setPage }) => {
         <p>Prijs: <Textbox value={selectedPrijs}/></p>
         <p>Barcode: <Textbox value={selectedBarcode}/></p>
         <p>sku: <Textbox value={selectedsku}/></p>
-        <p>Voorraad: <Textbox value={selectedvoorraad}/></p>
+        <p>Voorraad: <NumberBox value={selectedvoorraad}/></p>
        
         <Button label="Annuleren" onClick={() => setIsModalOpen(false)} />
         <Button label="Opslaan" onClick={() => setIsModalOpen(false)} />
