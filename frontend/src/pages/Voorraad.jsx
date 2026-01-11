@@ -11,9 +11,13 @@ import "./index.css";
 const Voorraad = ({ setPage }) => {
   const [textValue, setTextValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedPrijs, setSelectedPrijs] = useState(null);
   const [selectedBarcode, setSelectedBarcode] = useState(null);
+  const [selectedsku, setSelectedsku] = useState(null);
+  const [selectedvoorraad, setSelectedvoorraad] = useState(null);
   const mockData = [ { product: "Appel", prijs: "€1,45", barcode: "1858742704", sku: "5835-1839", voorraad: 54, }, { product: "Peer", prijs: "€1,55", barcode: "693074709", sku: "0128-3291", voorraad: 89, }, { product: "Tomaat", prijs: "€1,10", barcode: "359635678", sku: "0537-8942", voorraad: 8, }, ]; 
-  const handleEdit = (barcode) => { setSelectedBarcode(barcode); setIsModalOpen(true); };
+  const handleEdit = (product, prijs, barcode, sku, voorraad) => { setSelectedProduct(product); setSelectedPrijs(prijs); setSelectedBarcode(barcode); setSelectedsku(sku); setSelectedvoorraad(voorraad); setIsModalOpen(true); };
 
   return (
     <div className="container">
@@ -37,14 +41,14 @@ const Voorraad = ({ setPage }) => {
 
   <tbody>
     {mockData.map((row) => (
-      <tr key={row.barcode}>
+      <tr>
         <td>{row.product}</td>
         <td>{row.prijs}</td>
         <td>{row.barcode}</td>
         <td>{row.sku}</td>
         <td>{row.voorraad}</td>
         <td>
-          <button onClick={() => handleEdit(row.barcode)}>Edit</button>
+          <button onClick={() => handleEdit(row.product, row.prijs, row.barcode, row.sku, row.voorraad)}>Edit</button>
         </td>
       </tr>
     ))}
@@ -52,9 +56,16 @@ const Voorraad = ({ setPage }) => {
 </Table>
 
     <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <div className="container">
         <h2>Product aanpassen</h2>
-        <p>Barcode: {selectedBarcode}</p>
+        <p>Product: <Textbox value={selectedProduct}/></p>
+        <p>Prijs: <Textbox value={selectedPrijs}/></p>
+        <p>Barcode: <Textbox value={selectedBarcode}/></p>
+        <p>sku: <Textbox value={selectedsku}/></p>
+        <p>Voorraad: <Textbox value={selectedvoorraad}/></p>
+       
         <Button label="Annuleren" onClick={() => setIsModalOpen(false)} />
+      </div>
       </Modal>
       </div>  
   
