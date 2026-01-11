@@ -24,7 +24,7 @@ const Voorraad = ({ setPage }) => {
       <Logo />
       <h1>Voorraadbeheer</h1>
       <Separator variant="vertical" />
-      <SearchBox size="big" value={textValue} onChange={(e) => setTextValue(e.target.value)}/>
+      <SearchBox size="big" value={textValue} placeholder="Product, barcode of SKU" onChange={(e) => setTextValue(e.target.value)}/>
       <Button onClick={() => setPage("home")} size="small" label="Terug" />
     <Table>
   <thead>
@@ -47,7 +47,7 @@ const Voorraad = ({ setPage }) => {
         <td>{row.sku}</td>
         <td>{row.voorraad}</td>
         <td>
-          <button onClick={() => handleEdit(row.product, row.prijs, row.barcode, row.sku, row.voorraad)}>Edit</button>
+          <img className="editbutton" onClick={() => handleEdit(row.product, row.prijs, row.barcode, row.sku, row.voorraad)}src="../assets/edit.png" alt="Edit" />
         </td>
       </tr>
     ))}
@@ -64,6 +64,7 @@ const Voorraad = ({ setPage }) => {
         <p>Voorraad: <Textbox value={selectedvoorraad}/></p>
        
         <Button label="Annuleren" onClick={() => setIsModalOpen(false)} />
+        <Button label="Opslaan" onClick={() => setIsModalOpen(false)} />
       </div>
       </Modal>
       </div>  
