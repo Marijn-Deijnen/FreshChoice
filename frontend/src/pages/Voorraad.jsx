@@ -18,6 +18,12 @@ const Voorraad = ({ setPage }) => {
   const [selectedvoorraad, setSelectedvoorraad] = useState(null);
   const mockData = [ { product: "Appel", prijs: "€1,45", barcode: "1858742704", sku: "5835-1839", voorraad: 54, }, { product: "Peer", prijs: "€1,55", barcode: "693074709", sku: "0128-3291", voorraad: 89, }, { product: "Tomaat", prijs: "€1,10", barcode: "359635678", sku: "0537-8942", voorraad: 8, }, ]; 
   const handleEdit = (product, prijs, barcode, sku, voorraad) => { setSelectedProduct(product); setSelectedPrijs(prijs); setSelectedBarcode(barcode); setSelectedsku(sku); setSelectedvoorraad(voorraad); setIsModalOpen(true); };
+  const filteredData = mockData.filter((item) =>
+  item.product.toLowerCase().includes(textValue.toLowerCase()) ||
+  item.barcode.includes(textValue) ||
+  item.sku.includes(textValue)
+);
+
 
   return (
     <div className="container">
@@ -39,7 +45,7 @@ const Voorraad = ({ setPage }) => {
   </thead>
 
   <tbody>
-    {mockData.map((row) => (
+     {filteredData.map((row) => (
       <tr>
         <td>{row.product}</td>
         <td>{row.prijs}</td>
