@@ -18,8 +18,15 @@
     position: relative;
     max-height: 90vh;
     overflow: auto;
-    text-align: center;
-
+    text-align: left;
+}
+.children{
+    left: 40%;
+    
+    
+}
+.modal-knop{
+    margin-left: 20px;
 }
 .editbutton{
     width: 20px;

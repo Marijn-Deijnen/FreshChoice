@@ -146,9 +146,10 @@ const Voorraad = ({ setPage }) => {
               onChange={(e) => setSelectedvoorraad(e.target.value)}
             />
           </p>
-
-          <Button label="Annuleren" onClick={() => setIsModalOpen(false)} />
-          <Button label="Opslaan" onClick={() => setIsModalOpen(false)} />
+          <p>
+            <Button label="Annuleren" onClick={() => setIsModalOpen(false)} />
+            <Button label="Opslaan" onClick={() => setIsModalOpen(false)} />
+          </p>
         </div>
       </Modal>
     </div>
