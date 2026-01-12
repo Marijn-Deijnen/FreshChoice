@@ -23,9 +23,9 @@ const Levering = ({ setPage }) => {
   const [selected, setSelected] = useState({
     leverancier: "",
     inhoud: "",
-    arrivalISO: null,
+    arrivalISO: "",
     arrivalLabel: "",
-    status: "",
+    status: 0,
     id: undefined,
   });
   const [hideTodayButton, setHideTodayButton] = useState(false);
@@ -130,9 +130,9 @@ const Levering = ({ setPage }) => {
       id: row.id,
       leverancier: row.leverancier,
       inhoud: row.inhoud,
-      arrivalISO: row.arrival,
+      arrivalISO: row.arrival || "",
       arrivalLabel: formatArrival(row.arrival),
-      status: row.status,
+      status: Number(row.status) || 0,
     });
     setIsModalsOpen((s) => ({ ...s, editOpen: true }));
   };
@@ -142,7 +142,7 @@ const Levering = ({ setPage }) => {
       id: undefined,
       leverancier: "",
       inhoud: "",
-      arrivalISO: null,
+      arrivalISO: "",
       arrivalLabel: "",
       status: 0,
     });
@@ -193,8 +193,8 @@ const Levering = ({ setPage }) => {
           id: selected.id,
           leverancier: selected.leverancier,
           inhoud: selected.inhoud,
-          arrivalISO: selected.arrivalISO,
-          status: selected.status,
+          arrivalISO: selected.arrivalISO || "",
+          status: Number(selected.status) || 0,
         }}
         onSave={(payload) => {
           const { id, ...rest } = payload;

@@ -18,14 +18,28 @@ export default function useLeveringen(initial = []) {
     const e = {
       ...entry,
       arrival: entry.arrival || new Date().toISOString(),
-      status: entry.status ?? 0,
+      status: Number(entry.status) || 0,
     };
     setData((d) => [e, ...d]);
     return e;
   }, []);
 
   const update = useCallback((id, patch) => {
-    setData((d) => d.map((r) => (r.id === id ? { ...r, ...patch } : r)));
+    setData((d) =>
+      d.map((r) =>
+        r.id === id
+          ? {
+              ...r,
+              ...patch,
+              status:
+                patch.status !== undefined
+                  ? Number(patch.status) || 0
+                  : r.status,
+              arrival: patch.arrival !== undefined ? patch.arrival : r.arrival,
+            }
+          : r,
+      ),
+    );
   }, []);
 
   const remove = useCallback((id) => {
@@ -67,7 +81,11 @@ export default function useLeveringen(initial = []) {
           .includes(search.toLowerCase())
       )
         return false;
-      if (filters.status !== "" && row.status !== filters.status) return false;
+      if (
+        filters.status !== "" &&
+        Number(row.status) !== Number(filters.status)
+      )
+        return false;
       if (
         filters.leverancier &&
         !row.leverancier
