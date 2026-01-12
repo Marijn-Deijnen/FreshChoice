@@ -3,11 +3,7 @@ import Modal from "../../../components/Modal2";
 import Textbox from "../../../components/TextBox";
 import Button from "../../../components/Button";
 import { STATUS_ARRAY } from "../../../constants/status";
-import {
-  valueToLocalDate,
-  localDateToStartISO,
-  formatArrival,
-} from "../../../utils/dates";
+import { valueToLocalDate, localDateToStartISO } from "../../../utils/dates";
 
 const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
   const [form, setForm] = useState({
@@ -31,15 +27,16 @@ const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
   const handleChange = (patch) => setForm((f) => ({ ...f, ...patch }));
 
   const handleSave = () => {
-    const payload = {
-      id: form.id,
-      leverancier: form.leverancier.trim(),
-      inhoud: form.inhoud.trim(),
-      arrival: form.arrivalISO || new Date().toISOString(),
-      status: Number(form.status) || 0,
-    };
-    onSave && onSave(payload);
-    onClose && onClose();
+    // TODO: Save functie zodra die gemaakt is
+  };
+  const handleDelete = () => {
+    if (!form.id) return;
+    const ok = window.confirm(
+      "Weet je zeker dat je deze levering wilt verwijderen? Dit kan niet ongedaan gemaakt worden.",
+    );
+    if (!ok) return;
+
+    // TODO: Delete functie (zodra die gemaakt is)
   };
 
   return (
@@ -97,6 +94,13 @@ const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
         <div className="button-row">
           <Button label="Annuleren" onClick={onClose} variant="info" />
           <Button label="Opslaan" onClick={handleSave} variant="success" />
+          {form.id && (
+            <Button
+              label="Verwijderen"
+              onClick={handleDelete}
+              variant="error"
+            />
+          )}
         </div>
       </div>
     </Modal>
