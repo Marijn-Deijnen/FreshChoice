@@ -1,0 +1,128 @@
+.levering-page {
+  padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.levering-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  background: #fff;
+}
+.levering-page table th,
+.levering-page table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+  text-align: left;
+}
+.levering-page table th {
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+  background: transparent;
+  user-select: none;
+}
+.levering-page table tbody tr:hover {
+  background: #fafafa;
+}
+
+.levering-page table th[role="button"],
+.levering-page table th.sortable {
+  cursor: pointer;
+}
+.levering-page table th .sort-indicator {
+  margin-left: 8px;
+  font-size: 10px;
+  color: #666;
+}
+
+.editbutton {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.95;
+  transition: opacity 0.12s ease, transform 0.08s ease;
+}
+.editbutton:hover { opacity: 1; transform: translateY(-1px); }
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.modal .container,
+.modal-container {
+  background: #fff;
+  padding: 18px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(19, 28, 33, 0.12);
+  width: 420px;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
+  margin: 40px auto;
+}
+
+.modal .container h2,
+.modal-container h2 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+}
+.modal .container p,
+.modal-container p {
+  margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.modal .container p .textbox,
+.modal-container p .textbox {
+  width: 100%;
+}
+
+.modal .container .button-row,
+.modal-container .button-row {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.small-muted {
+  color: #666;
+  font-size: 12px;
+}
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.badge-gepland { background: #6c757d; }
+.badge-onderweg { background: #17a2b8; }
+.badge-geleverd { background: #28a745; }
+
+@media (max-width: 720px) {
+  .modal .container, .modal-container { width: 95%; margin: 20px auto; padding: 14px; }
+  .levering-page { padding: 12px; }
+  .toolbar-search { min-width: 120px; }
+}
