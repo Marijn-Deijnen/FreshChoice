@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Modal from "./Modal2";
-import Textbox from "./TextBox";
-import Button from "./Button";
-import { STATUS_ARRAY } from "../constants/status";
+import Modal from "../../../components/Modal2";
+import Textbox from "../../../components/TextBox";
+import Button from "../../../components/Button";
+import { STATUS_ARRAY } from "../../../constants/status";
 
 const FilterModal = ({ open, onClose, initialValues = {}, onApply }) => {
   const [leverancier, setLeverancier] = useState(
