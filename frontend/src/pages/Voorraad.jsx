@@ -10,7 +10,7 @@ import Modal from "../components/Modal2";
 import "./index.css";
 
 const Voorraad = ({ setPage }) => {
-  const [textValue, setTextValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedPrijs, setSelectedPrijs] = useState(null);
@@ -50,9 +50,9 @@ const Voorraad = ({ setPage }) => {
   };
   const filteredData = mockData.filter(
     (item) =>
-      item.product.toLowerCase().includes(textValue.toLowerCase()) ||
-      item.barcode.includes(textValue) ||
-      item.sku.includes(textValue),
+      item.product.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.barcode.includes(searchValue) ||
+      item.sku.includes(searchValue),
   );
 
   return (
@@ -62,9 +62,9 @@ const Voorraad = ({ setPage }) => {
       <Separator variant="vertical" />
       <SearchBox
         size="big"
-        value={textValue}
+        value={searchValue}
         placeholder="Product, barcode of SKU"
-        onChange={(e) => setTextValue(e.target.value)}
+        onChange={(e) => setSearchValue(e.target.value)}
       />
       <Button onClick={() => setPage("home")} size="small" label="Terug" />
       <Table>
