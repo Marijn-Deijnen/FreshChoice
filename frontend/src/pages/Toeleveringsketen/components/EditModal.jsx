@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../../components/Modal2";
 import Textbox from "../../../components/TextBox";
+import Dropdown from "../../../components/Dropdown";
+import DateInput from "../../../components/DateInput";
 import Button from "../../../components/Button";
 import { STATUS_ARRAY } from "../../../constants/status";
 import { valueToLocalDate, localDateToStartISO } from "../../../utils/dates";
@@ -55,8 +57,8 @@ const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
 
         <p>
           Aankomst:
-          <input
-            type="date"
+          <DateInput
+            compact
             value={valueToLocalDate(form.arrivalISO)}
             onChange={(e) => {
               const iso = e.target.value
@@ -69,17 +71,12 @@ const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
 
         <p>
           Status:
-          <select
+          <Dropdown
             value={form.status}
             onChange={(e) => handleChange({ status: e.target.value })}
-          >
-            <option value="">-- Kies status --</option>
-            {STATUS_ARRAY.map((label, i) => (
-              <option key={i} value={i}>
-                {label}
-              </option>
-            ))}
-          </select>
+            options={STATUS_ARRAY.map((label, i) => ({ value: i, label }))}
+            placeholder="-- Kies status --"
+          />
         </p>
 
         <div className="button-row">

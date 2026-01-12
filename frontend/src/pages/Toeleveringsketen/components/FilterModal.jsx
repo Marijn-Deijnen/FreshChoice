@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../../components/Modal2";
 import Textbox from "../../../components/TextBox";
+import Dropdown from "../../../components/Dropdown";
+import DateInput from "../../../components/DateInput";
 import Button from "../../../components/Button";
 import { STATUS_ARRAY } from "../../../constants/status";
 
@@ -46,20 +48,19 @@ const FilterModal = ({ open, onClose, initialValues = {}, onApply }) => {
 
         <p>
           Status:
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="">-- Alle --</option>
-            {STATUS_ARRAY.map((label, i) => (
-              <option key={i} value={i}>
-                {label}
-              </option>
-            ))}
-          </select>
+          <Dropdown
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            options={STATUS_ARRAY.map((label, i) => ({ value: i, label }))}
+            placeholder="-- Alle --"
+            compact
+          />
         </p>
 
         <p>
           Datum van:
-          <input
-            type="date"
+          <DateInput
+            compact
             value={dateFrom}
             onChange={(e) => setDateFrom(e.target.value)}
           />
@@ -67,8 +68,8 @@ const FilterModal = ({ open, onClose, initialValues = {}, onApply }) => {
 
         <p>
           Datum tot:
-          <input
-            type="date"
+          <DateInput
+            compact
             value={dateTo}
             onChange={(e) => setDateTo(e.target.value)}
           />
