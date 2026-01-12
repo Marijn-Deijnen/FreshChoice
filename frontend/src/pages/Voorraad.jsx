@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import voorraadService from "../services/voorraadService";
 import Button from "../components/Button";
 import SearchBox from "../components/SearchBox";
 import Separator from "../components/Separator";
@@ -10,6 +11,17 @@ import Modal from "../components/Modal";
 import "./index.css";
 
 const Voorraad = ({ setPage }) => {
+  const [products, setProducts] = useState([]);
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const result = await voorraadService.getAllProducts();
+      console.log(result.data);
+      setProducts(result.data);
+    })();
+  }, [refreshTrigger]);
+
   const [searchValue, setSearchValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState("");
@@ -17,29 +29,7 @@ const Voorraad = ({ setPage }) => {
   const [selectedBarcode, setSelectedBarcode] = useState("");
   const [selectedSku, setSelectedSku] = useState("");
   const [selectedVoorraad, setSelectedVoorraad] = useState("");
-  const mockData = [
-    {
-      product: "Appel",
-      prijs: "€1,45",
-      barcode: "1858742704",
-      sku: "5835-1839",
-      voorraad: 54,
-    },
-    {
-      product: "Peer",
-      prijs: "€1,55",
-      barcode: "693074709",
-      sku: "0128-3291",
-      voorraad: 89,
-    },
-    {
-      product: "Tomaat",
-      prijs: "€1,10",
-      barcode: "359635678",
-      sku: "0537-8942",
-      voorraad: 8,
-    },
-  ];
+
   const handleEdit = (product, prijs, barcode, sku, voorraad) => {
     setSelectedProduct(product);
     setSelectedPrijs(prijs);
@@ -48,12 +38,25 @@ const Voorraad = ({ setPage }) => {
     setSelectedVoorraad(voorraad);
     setIsModalOpen(true);
   };
-  const filteredData = mockData.filter(
+
+  const filteredProducts = products.filter(
     (item) =>
       item.product.toLowerCase().includes(searchValue.toLowerCase()) ||
       item.barcode.includes(searchValue) ||
       item.sku.includes(searchValue),
   );
+
+  const handleSave = async () => {
+    setIsModalOpen(false);
+    await voorraadService.updateProduct(
+      selectedBarcode,
+      selectedProduct,
+      selectedPrijs,
+      selectedSku,
+      selectedVoorraad,
+    );
+    setRefreshTrigger(!refreshTrigger);
+  };
 
   return (
     <div className="container">
@@ -84,7 +87,7 @@ const Voorraad = ({ setPage }) => {
         </thead>
 
         <tbody>
-          {filteredData.map((row) => (
+          {filteredProducts.map((row) => (
             <tr>
               <td>{row.product}</td>
               <td>{row.prijs}</td>
@@ -115,6 +118,7 @@ const Voorraad = ({ setPage }) => {
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className="container">
           <h2>Product aanpassen</h2>
+          <p>Barcode: {selectedBarcode}</p>
           <p>
             Product:{" "}
             <Textbox
@@ -130,14 +134,7 @@ const Voorraad = ({ setPage }) => {
             />
           </p>
           <p>
-            Barcode:{" "}
-            <Textbox
-              value={selectedBarcode}
-              onChange={(e) => setSelectedBarcode(e.target.value)}
-            />
-          </p>
-          <p>
-            sku:{" "}
+            SKU:{" "}
             <Textbox
               value={selectedSku}
               onChange={(e) => setSelectedSku(e.target.value)}
@@ -152,7 +149,7 @@ const Voorraad = ({ setPage }) => {
           </p>
           <p>
             <Button label="Annuleren" onClick={() => setIsModalOpen(false)} />
-            <Button label="Opslaan" onClick={() => setIsModalOpen(false)} />
+            <Button label="Opslaan" onClick={handleSave} />
           </p>
         </div>
       </Modal>
