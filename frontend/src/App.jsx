@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Home from "./pages/Home";
 import Voorraad from "./pages/Voorraad";
-import Levering from "./pages/Levering";
+import Levering from "./pages/Toeleveringsketen/Levering";
 
 const App = () => {
   const [page, setPage] = useState("home");
