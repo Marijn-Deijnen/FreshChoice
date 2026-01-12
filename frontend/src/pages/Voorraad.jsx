@@ -6,7 +6,7 @@ import Logo from "../components/Logo";
 import Table from "../components/Table";
 import Textbox from "../components/TextBox";
 import NumberBox from "../components/NumberBox";
-import Modal from "../components/Modal2";
+import Modal from "../components/Modal";
 import "./index.css";
 
 const Voorraad = ({ setPage }) => {
@@ -15,8 +15,8 @@ const Voorraad = ({ setPage }) => {
   const [selectedProduct, setSelectedProduct] = useState("");
   const [selectedPrijs, setSelectedPrijs] = useState("");
   const [selectedBarcode, setSelectedBarcode] = useState("");
-  const [selectedsku, setSelectedsku] = useState("");
-  const [selectedvoorraad, setSelectedvoorraad] = useState("");
+  const [selectedSku, setSelectedSku] = useState("");
+  const [selectedVoorraad, setSelectedVoorraad] = useState("");
   const mockData = [
     {
       product: "Appel",
@@ -44,8 +44,8 @@ const Voorraad = ({ setPage }) => {
     setSelectedProduct(product);
     setSelectedPrijs(prijs);
     setSelectedBarcode(barcode);
-    setSelectedsku(sku);
-    setSelectedvoorraad(voorraad);
+    setSelectedSku(sku);
+    setSelectedVoorraad(voorraad);
     setIsModalOpen(true);
   };
   const filteredData = mockData.filter(
@@ -139,15 +139,15 @@ const Voorraad = ({ setPage }) => {
           <p>
             sku:{" "}
             <Textbox
-              value={selectedsku}
-              onChange={(e) => setSelectedsku(e.target.value)}
+              value={selectedSku}
+              onChange={(e) => setSelectedSku(e.target.value)}
             />
           </p>
           <p>
             Voorraad:{" "}
             <NumberBox
-              value={selectedvoorraad}
-              onChange={(e) => setSelectedvoorraad(e.target.value)}
+              value={selectedVoorraad}
+              onChange={(e) => setSelectedVoorraad(e.target.value)}
             />
           </p>
           <p>
