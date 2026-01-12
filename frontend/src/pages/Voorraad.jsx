@@ -70,7 +70,7 @@ const Voorraad = ({ setPage }) => {
         placeholder="Product, barcode of SKU"
         onChange={(e) => setSearchValue(e.target.value)}
       />
-      <Button onClick={() => setPage("home")} size="small" label="Terug" />
+
       <Table>
         <thead>
           <tr>

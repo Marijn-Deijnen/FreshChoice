@@ -13,7 +13,6 @@ const Levering = ({ setPage }) => {
         <Button onClick={() => setPage("voorraad")} label="Voorraadbeheer" />
       </p>
       <Separator />
-      <Button onClick={() => setPage("home")} size="small" label="Terug" />
     </div>
   );
 };
