@@ -17,7 +17,6 @@ const Voorraad = ({ setPage }) => {
   useEffect(() => {
     (async () => {
       const result = await voorraadService.getAllProducts();
-      console.log(result.data);
       setProducts(result.data);
     })();
   }, [refreshTrigger]);
@@ -41,7 +40,7 @@ const Voorraad = ({ setPage }) => {
 
   const filteredProducts = products.filter(
     (item) =>
-      item.product.toLowerCase().includes(searchValue.toLowerCase()) ||
+      item.naam.toLowerCase().includes(searchValue.toLowerCase()) ||
       item.barcode.includes(searchValue) ||
       item.sku.includes(searchValue),
   );
@@ -89,21 +88,21 @@ const Voorraad = ({ setPage }) => {
         <tbody>
           {filteredProducts.map((row) => (
             <tr>
-              <td>{row.product}</td>
+              <td>{row.naam}</td>
               <td>{row.prijs}</td>
               <td>{row.barcode}</td>
               <td>{row.sku}</td>
-              <td>{row.voorraad}</td>
+              <td>{row.voorraad_aantal}</td>
               <td>
                 <img
                   className="editbutton"
                   onClick={() =>
                     handleEdit(
-                      row.product,
+                      row.naam,
                       row.prijs,
                       row.barcode,
                       row.sku,
-                      row.voorraad,
+                      row.voorraad_aantal,
                     )
                   }
                   src="../assets/edit.png"
