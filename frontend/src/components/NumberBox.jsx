@@ -1,13 +1,7 @@
 import "./Numberbox.css";
 
-const NumberBox = ({
-  size = "medium",
-  placeholder = "",
-  value,
-  onChange,
-}) => {
+const NumberBox = ({ size = "medium", placeholder = "", value, onChange }) => {
   const className = `numberbox ${size}`;
-
 
   return (
     <input
