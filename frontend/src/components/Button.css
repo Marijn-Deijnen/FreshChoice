@@ -26,3 +26,13 @@
 .button.large {
     width: 300px;
 }
+
+.button.default { background: #007bff; color: #fff; }
+.button.info    { background: #17a2b8; color: #fff; }
+.button.success { background: #28a745; color: #fff; }
+.button.error   { background: #dc3545; color: #fff; }
+
+.button.default:hover { background: #0069d9; }
+.button.info:hover    { background: #138496; }
+.button.success:hover { background: #218838; }
+.button.error:hover   { background: #c82333; }

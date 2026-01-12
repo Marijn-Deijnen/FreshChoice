@@ -1,8 +1,8 @@
 import "./Button.css";
 
-const Button = ({ label, size = "medium", onClick }) => {
+const Button = ({ label, size = "medium", onClick, variant = "default" }) => {
   return (
-    <button className={`button ${size}`} onClick={onClick}>
+    <button className={`button ${size} ${variant}`} onClick={onClick}>
       {label}
     </button>
   );
