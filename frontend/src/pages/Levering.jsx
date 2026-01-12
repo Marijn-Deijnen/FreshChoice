@@ -7,7 +7,11 @@ const Levering = ({ setPage }) => {
   return (
     <div className="container">
       <Logo />
-      <h1>Toeleveringsketen</h1>
+      <p>
+        <Button onClick={() => setPage("home")} label="Home" />
+        <Button onClick={() => setPage("levering")} label="Toeleveringsketen" />
+        <Button onClick={() => setPage("voorraad")} label="Voorraadbeheer" />
+      </p>
       <Separator />
       <Button onClick={() => setPage("home")} size="small" label="Terug" />
     </div>

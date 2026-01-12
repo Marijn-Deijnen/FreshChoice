@@ -58,7 +58,11 @@ const Voorraad = ({ setPage }) => {
   return (
     <div className="container">
       <Logo />
-      <h1>Voorraadbeheer</h1>
+      <p>
+        <Button onClick={() => setPage("home")} label="Home" />
+        <Button onClick={() => setPage("levering")} label="Toeleveringsketen" />
+        <Button onClick={() => setPage("voorraad")} label="Voorraadbeheer" />
+      </p>
       <Separator variant="vertical" />
       <SearchBox
         size="big"

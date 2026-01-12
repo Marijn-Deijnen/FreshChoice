@@ -7,10 +7,12 @@ const Home = ({ setPage }) => {
   return (
     <div className="container">
       <Logo />
-      <h1>Home</h1>
+      <p>
+        <Button onClick={() => setPage("home")} label="Home" />
+        <Button onClick={() => setPage("levering")} label="Toeleveringsketen" />
+        <Button onClick={() => setPage("voorraad")} label="Voorraadbeheer" />
+      </p>
       <Separator />
-      <Button onClick={() => setPage("levering")} label="Toeleveringsketen" />
-      <Button onClick={() => setPage("voorraad")} label="Voorraadbeheer" />
     </div>
   );
 };
