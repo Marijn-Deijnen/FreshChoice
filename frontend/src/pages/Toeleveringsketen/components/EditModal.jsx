@@ -29,15 +29,6 @@ const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
   const handleSave = () => {
     // TODO: Save functie zodra die gemaakt is
   };
-  const handleDelete = () => {
-    if (!form.id) return;
-    const ok = window.confirm(
-      "Weet je zeker dat je deze levering wilt verwijderen? Dit kan niet ongedaan gemaakt worden.",
-    );
-    if (!ok) return;
-
-    // TODO: Delete functie (zodra die gemaakt is)
-  };
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -94,13 +85,6 @@ const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
         <div className="button-row">
           <Button label="Annuleren" onClick={onClose} variant="info" />
           <Button label="Opslaan" onClick={handleSave} variant="success" />
-          {form.id && (
-            <Button
-              label="Verwijderen"
-              onClick={handleDelete}
-              variant="error"
-            />
-          )}
         </div>
       </div>
     </Modal>
