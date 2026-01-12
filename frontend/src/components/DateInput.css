@@ -1,0 +1,28 @@
+.date-input {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: auto;
+  max-width: 100%;
+}
+
+.date-input__control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.2;
+  height: 36px;
+  background-color: #fff;
+  color: #222;
+  box-sizing: border-box;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  cursor: pointer;
+  width: auto;
+  min-width: 140px;
+  max-width: 100%;
+  display: inline-block;
+}
