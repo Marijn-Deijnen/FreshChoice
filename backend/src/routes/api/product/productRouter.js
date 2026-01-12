@@ -7,14 +7,22 @@ productRouter.use(express.json());
 
 productRouter.post("/", async (req, res) => {
   console.log(req.body);
-  const { naam, prijs, voorraad_aantal } = req.body;
+  const { barcode, naam, sku, prijs, voorraad_aantal } = req.body;
 
   const existing = await Product.findOne({ where: { naam } });
   if (existing) {
-    return res.status(409).json({ error: "Product bestaat al" });
+    return res
+      .status(409)
+      .json({ error: `Product bestaat al: barcode ${existing.barcode}` });
   }
 
-  const newProduct = await Product.create({ naam, prijs, voorraad_aantal });
+  const newProduct = await Product.create({
+    barcode,
+    naam,
+    sku,
+    prijs,
+    voorraad_aantal,
+  });
   res.status(201).json(newProduct);
 });
 
@@ -23,9 +31,9 @@ productRouter.get("/", async (req, res) => {
   res.status(200).json(products);
 });
 
-productRouter.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findByPk(id);
+productRouter.get("/:barcode", async (req, res) => {
+  const { barcode } = req.params;
+  const product = await Product.findByPk(barcode);
   if (product) {
     res.status(200).json(product);
   } else {
@@ -33,27 +41,27 @@ productRouter.get("/:id", async (req, res) => {
   }
 });
 
-productRouter.put("/:id", async (req, res) => {
-  const { id } = req.params;
+productRouter.put("/:barcode", async (req, res) => {
+  const { barcode } = req.params;
   const { naam, prijs, voorraad_aantal } = req.body;
-  
-  const product = await Product.findByPk(id);
+
+  const product = await Product.findByPk(barcode);
   if (!product) {
     return res.status(404).json({ error: "Product niet gevonden" });
   }
-  
+
   await product.update({
     naam: naam ?? product.naam,
     prijs: prijs ?? product.prijs,
     voorraad_aantal: voorraad_aantal ?? product.voorraad_aantal,
   });
-  
+
   res.status(200).json({ message: "Product aangepast" });
 });
 
-productRouter.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  const deleted = await Product.destroy({ where: { product_id: id } });
+productRouter.delete("/:barcode", async (req, res) => {
+  const { barcode } = req.params;
+  const deleted = await Product.destroy({ where: { barcode } });
   if (deleted) {
     res.status(200).json({ message: "Product verwijderd" });
   } else {
