@@ -1,0 +1,36 @@
+.modal-overlay {
+    position: absolute;
+    display: flex;
+    top: 200px;
+    left: 20%;
+    align-items: center;
+    justify-items: center;
+    width: 80%;
+}
+.modal-content{
+    background: #fff;
+    align-items: center;
+    justify-items: center;
+    width: min(1000px, 100%);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    padding: 24px;
+    position: relative;
+    max-height: 90vh;
+    overflow: auto;
+    text-align: center;
+
+}
+.modal-content .button-row,
+.modal .container .button-row,
+.modal-container .button-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.editbutton{
+    width: 20px;
+    cursor: pointer;
+}
