@@ -1,7 +1,7 @@
 export const toDate = (v) => {
   if (v == null || v === "") return null;
   if (v instanceof Date) return v;
-  if (typeof v === "number") return new Date(v); // assume ms
+  if (typeof v === "number") return new Date(v);
   if (typeof v === "string") {
     const ms = Date.parse(v);
     return isNaN(ms) ? null : new Date(ms);
