@@ -1,0 +1,94 @@
+import React, { useState, useEffect } from "react";
+import Modal from "./Modal2";
+import Textbox from "./TextBox";
+import Button from "./Button";
+import { STATUS_ARRAY } from "../constants/status";
+
+const FilterModal = ({ open, onClose, initialValues = {}, onApply }) => {
+  const [leverancier, setLeverancier] = useState(
+    initialValues.leverancier || "",
+  );
+  const [inhoud, setInhoud] = useState(initialValues.inhoud || "");
+  const [status, setStatus] = useState(initialValues.status ?? "");
+  const [dateFrom, setDateFrom] = useState(initialValues.dateFrom || "");
+  const [dateTo, setDateTo] = useState(initialValues.dateTo || "");
+
+  useEffect(() => {
+    setLeverancier(initialValues.leverancier || "");
+    setInhoud(initialValues.inhoud || "");
+    setStatus(initialValues.status ?? "");
+    setDateFrom(initialValues.dateFrom || "");
+    setDateTo(initialValues.dateTo || "");
+  }, [initialValues, open]);
+
+  return (
+    <Modal open={open} onClose={onClose}>
+      <div className="container">
+        <h2>Filter</h2>
+
+        <p>
+          Leverancier:
+          <Textbox
+            value={leverancier}
+            placeholder="Leverancier"
+            onChange={(e) => setLeverancier(e.target.value)}
+          />
+        </p>
+
+        <p>
+          Inhoud:
+          <Textbox
+            value={inhoud}
+            placeholder="Inhoud"
+            onChange={(e) => setInhoud(e.target.value)}
+          />
+        </p>
+
+        <p>
+          Status:
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="">-- Alle --</option>
+            {STATUS_ARRAY.map((label, i) => (
+              <option key={i} value={i}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </p>
+
+        <p>
+          Datum van:
+          <input
+            type="date"
+            value={dateFrom}
+            onChange={(e) => setDateFrom(e.target.value)}
+          />
+        </p>
+
+        <p>
+          Datum tot:
+          <input
+            type="date"
+            value={dateTo}
+            onChange={(e) => setDateTo(e.target.value)}
+          />
+        </p>
+
+        <div className="button-row">
+          <Button label="Annuleren" onClick={onClose} variant="info" />
+          <Button
+            label="Toepassen"
+            variant="success"
+            onClick={() => {
+              onApply &&
+                onApply({ leverancier, inhoud, status, dateFrom, dateTo });
+              onClose && onClose();
+            }}
+          />
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+export default FilterModal;
