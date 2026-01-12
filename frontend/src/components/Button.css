@@ -21,8 +21,12 @@
 
 .button.medium {
     width: 200px;
+    margin-left: 20px;
 }
 
 .button.large {
     width: 300px;
+}
+.button.active{
+background-color: #088F40;    
 }
