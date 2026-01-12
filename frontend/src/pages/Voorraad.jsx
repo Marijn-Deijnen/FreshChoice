@@ -12,11 +12,11 @@ import "./index.css";
 const Voorraad = ({ setPage }) => {
   const [searchValue, setSearchValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedPrijs, setSelectedPrijs] = useState(null);
-  const [selectedBarcode, setSelectedBarcode] = useState(null);
-  const [selectedsku, setSelectedsku] = useState(null);
-  const [selectedvoorraad, setSelectedvoorraad] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const [selectedPrijs, setSelectedPrijs] = useState("");
+  const [selectedBarcode, setSelectedBarcode] = useState("");
+  const [selectedsku, setSelectedsku] = useState("");
+  const [selectedvoorraad, setSelectedvoorraad] = useState("");
   const mockData = [
     {
       product: "Appel",
@@ -112,19 +112,39 @@ const Voorraad = ({ setPage }) => {
         <div className="container">
           <h2>Product aanpassen</h2>
           <p>
-            Product: <Textbox value={selectedProduct} />
+            Product:{" "}
+            <Textbox
+              value={selectedProduct}
+              onChange={(e) => setSelectedProduct(e.target.value)}
+            />
           </p>
           <p>
-            Prijs: <Textbox value={selectedPrijs} />
+            Prijs:{" "}
+            <Textbox
+              value={selectedPrijs}
+              onChange={(e) => setSelectedPrijs(e.target.value)}
+            />
           </p>
           <p>
-            Barcode: <Textbox value={selectedBarcode} />
+            Barcode:{" "}
+            <Textbox
+              value={selectedBarcode}
+              onChange={(e) => setSelectedBarcode(e.target.value)}
+            />
           </p>
           <p>
-            sku: <Textbox value={selectedsku} />
+            sku:{" "}
+            <Textbox
+              value={selectedsku}
+              onChange={(e) => setSelectedsku(e.target.value)}
+            />
           </p>
           <p>
-            Voorraad: <NumberBox value={selectedvoorraad} />
+            Voorraad:{" "}
+            <NumberBox
+              value={selectedvoorraad}
+              onChange={(e) => setSelectedvoorraad(e.target.value)}
+            />
           </p>
 
           <Button label="Annuleren" onClick={() => setIsModalOpen(false)} />
