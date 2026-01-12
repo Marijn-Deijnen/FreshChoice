@@ -45,6 +45,10 @@ const Voorraad = ({ setPage }) => {
       item.sku.includes(searchValue),
   );
 
+  const sortedProducts = filteredProducts.sort((a, b) =>
+    a.naam.localeCompare(b.naam),
+  );
+
   const handleSave = async () => {
     setIsModalOpen(false);
     await voorraadService.updateProduct(
@@ -86,7 +90,7 @@ const Voorraad = ({ setPage }) => {
         </thead>
 
         <tbody>
-          {filteredProducts.map((row) => (
+          {sortedProducts.map((row) => (
             <tr>
               <td>{row.naam}</td>
               <td>{row.prijs}</td>
