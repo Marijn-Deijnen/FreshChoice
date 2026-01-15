@@ -95,7 +95,7 @@ const DeliveriesTable = ({
                       "Weet je zeker dat je deze levering wilt verwijderen? Dit kan niet ongedaan gemaakt worden.",
                     );
                     if (confirm) {
-                      onDelete(row);
+                      onDelete(row.id);
                     }
                   }}
                   style={{

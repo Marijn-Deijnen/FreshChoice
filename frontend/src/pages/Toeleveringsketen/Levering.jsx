@@ -1,7 +1,5 @@
 import { useState } from "react";
 import Toolbar from "../../components/Toolbar";
-import Logo from "../../components/Logo";
-import Separator from "../../components/Separator";
 import DeliveriesTable from "./components/DeliveriesTable";
 import EditModal from "./components/EditModal";
 import FilterModal from "./components/FilterModal";
@@ -30,100 +28,6 @@ const Levering = () => {
   });
   const [hideTodayButton, setHideTodayButton] = useState(false);
 
-  const mockData = [
-    {
-      id: 1,
-      leverancier: "Bakkerij Het Stoepje",
-      inhoud: "Vers brood & Gebak",
-      arrival: "2026-01-12T17:38:04Z",
-      status: 0,
-    },
-    {
-      id: 2,
-      leverancier: "Coca Cola Beverages",
-      inhoud: "Frisdranken",
-      arrival: "2026-01-10T09:00:00Z",
-      status: 1,
-    },
-    {
-      id: 3,
-      leverancier: "Melkunie Distributie",
-      inhoud: "Zuivel & Eieren",
-      arrival: "2026-01-11T12:30:00Z",
-      status: 1,
-    },
-    {
-      id: 4,
-      leverancier: "Vion Food Group",
-      inhoud: "Rund- en varkensvlees",
-      arrival: "2026-01-12T08:15:00Z",
-      status: 0,
-    },
-    {
-      id: 5,
-      leverancier: "Greenyard Fresh",
-      inhoud: "Groenten en fruit",
-      arrival: "2026-01-11T07:45:00Z",
-      status: 1,
-    },
-    {
-      id: 6,
-      leverancier: "Heineken Supply",
-      inhoud: "Bier en fusten",
-      arrival: "2026-01-09T16:20:00Z",
-      status: 0,
-    },
-    {
-      id: 7,
-      leverancier: "Van Geloven Snacks",
-      inhoud: "Diepvries snacks",
-      arrival: "2026-01-10T11:10:00Z",
-      status: 1,
-    },
-    {
-      id: 8,
-      leverancier: "Unilever Food Solutions",
-      inhoud: "Sauzen & soepen",
-      arrival: "2026-01-09T13:00:00Z",
-      status: 1,
-    },
-    {
-      id: 9,
-      leverancier: "Aviko Logistics",
-      inhoud: "Aardappelproducten",
-      arrival: "2026-01-08T06:30:00Z",
-      status: 0,
-    },
-    {
-      id: 10,
-      leverancier: "Verstegen Spices",
-      inhoud: "Kruiden & specerijen",
-      arrival: "2026-01-07T14:00:00Z",
-      status: 1,
-    },
-    {
-      id: 11,
-      leverancier: "Campina Transport",
-      inhoud: "Melk & yoghurt",
-      arrival: "2026-01-06T10:00:00Z",
-      status: 2,
-    },
-    {
-      id: 12,
-      leverancier: "Bolletje Groothandel",
-      inhoud: "Beschuit & crackers",
-      arrival: "2026-01-05T09:15:00Z",
-      status: 2,
-    },
-    {
-      id: 13,
-      leverancier: "Makro Distributiecentrum",
-      inhoud: "Horeca grootverpakkingen",
-      arrival: "2026-01-04T18:45:00Z",
-      status: 0,
-    },
-  ];
-
   const {
     displayedData,
     search,
@@ -136,7 +40,8 @@ const Levering = () => {
     toggleSort,
     create,
     update,
-  } = useLeveringen(mockData);
+    remove,
+  } = useLeveringen();
 
   const handleEdit = (row) => {
     setSelected({
@@ -169,6 +74,10 @@ const Levering = () => {
     setHideTodayButton(false);
   };
 
+  const handleDelete = async (id) => {
+    remove(id);
+  };
+
   return (
     <div className="container">
       <h2>Toeleveringsketen</h2>
@@ -194,6 +103,7 @@ const Levering = () => {
         sort={sort}
         toggleSort={toggleSort}
         onEdit={handleEdit}
+        onDelete={handleDelete}
       />
 
       <EditModal

@@ -6,12 +6,12 @@ const leveringRouter = express.Router();
 leveringRouter.use(express.json());
 
 leveringRouter.post("/", async (req, res) => {
-  const { leverancier, inhoud, aankomst, status } = req.body;
+  const { leverancier, inhoud, aankomst, status_code } = req.body;
   const newLevering = await Levering.create({
     leverancier,
     inhoud,
     aankomst,
-    status,
+    status_code,
   });
   return res.status(201).json(newLevering);
 });
@@ -38,12 +38,12 @@ leveringRouter.put("/:id", async (req, res) => {
     return res.status(404).json({ error: "Levering niet gevonden" });
   }
 
-  const { leverancier, inhoud, aankomst, status } = req.body;
+  const { leverancier, inhoud, aankomst, status_code } = req.body;
   await levering.update({
     leverancier: leverancier ?? levering.leverancier,
     inhoud: inhoud ?? levering.inhoud,
     aankomst: aankomst ?? levering.aankomst,
-    status: status ?? levering.status,
+    status_code: status_code ?? levering.status_code,
   });
   return res.status(200).json({ message: "Levering aangepast" });
 });

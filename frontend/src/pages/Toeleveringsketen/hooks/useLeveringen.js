@@ -1,8 +1,11 @@
 import { useState, useCallback } from "react";
 import { toDate, isSameDay } from "../../../utils/dates";
+import { useEffect } from "react";
+import leveringService from "../../../services/leveringService";
 
 export default function useLeveringen(initial = []) {
   const [data, setData] = useState(initial);
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
   const [search, setSearch] = useState("");
   const [showTodayOnly, setShowTodayOnly] = useState(false);
   const [filters, setFilters] = useState({
@@ -14,37 +17,36 @@ export default function useLeveringen(initial = []) {
   });
   const [sort, setSort] = useState({ by: "leverancier", dir: "asc" });
 
-  const create = useCallback((entry) => {
-    const e = {
-      ...entry,
-      arrival: entry.arrival || new Date().toISOString(),
-      status: Number(entry.status) || 0,
-    };
-    setData((d) => [e, ...d]);
-    return e;
-  }, []);
+  useEffect(() => {
+    (async () => {
+      const leveringen = await leveringService.getAllLeveringen();
+      setData(leveringen);
+    })();
+  }, [refreshTrigger]);
 
-  const update = useCallback((id, patch) => {
-    setData((d) =>
-      d.map((r) =>
-        r.id === id
-          ? {
-              ...r,
-              ...patch,
-              status:
-                patch.status !== undefined
-                  ? Number(patch.status) || 0
-                  : r.status,
-              arrival: patch.arrival !== undefined ? patch.arrival : r.arrival,
-            }
-          : r,
-      ),
-    );
-  }, []);
+  const create = useCallback(
+    async (entry) => {
+      await leveringService.createNewLevering(entry);
+      setRefreshTrigger(!refreshTrigger);
+    },
+    [refreshTrigger],
+  );
 
-  const remove = useCallback((id) => {
-    setData((d) => d.filter((r) => r.id !== id));
-  }, []);
+  const update = useCallback(
+    async (id, patch) => {
+      await leveringService.updateLevering(id, patch);
+      setRefreshTrigger(!refreshTrigger);
+    },
+    [refreshTrigger],
+  );
+
+  const remove = useCallback(
+    async (id) => {
+      await leveringService.deleteLevering(id);
+      setRefreshTrigger(!refreshTrigger);
+    },
+    [refreshTrigger],
+  );
 
   const resetFilters = useCallback(() => {
     setFilters({

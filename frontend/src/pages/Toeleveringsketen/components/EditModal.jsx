@@ -19,7 +19,7 @@ const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
   const handleChange = (patch) => setForm((f) => ({ ...f, ...patch }));
 
   const handleSave = () => {
-    onSave();
+    onSave(form);
   };
 
   const optionStyle = { display: "flex", alignItems: "center", gap: 10 };
