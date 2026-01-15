@@ -22,31 +22,31 @@ const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
     onSave();
   };
 
+  const optionStyle = { display: "flex", alignItems: "center", gap: 10 };
+
   return (
     <Modal open={open} onClose={onClose}>
       <div className="container">
         <h2>{form.id ? "Levering aanpassen" : "Levering toevoegen"}</h2>
 
-        <p>
-          Leverancier:
+        <div style={optionStyle}>
+          <p>Leverancier:</p>
           <Textbox
             value={form.leverancier}
             placeholder="Voer leverancier in"
             onChange={(e) => handleChange({ leverancier: e.target.value })}
           />
-        </p>
-
-        <p>
-          Inhoud:
+        </div>
+        <div style={optionStyle}>
+          <p>Inhoud:</p>
           <Textbox
             value={form.inhoud}
             placeholder="Voer inhoud/beschrijving in"
             onChange={(e) => handleChange({ inhoud: e.target.value })}
           />
-        </p>
-
-        <p>
-          Aankomst:
+        </div>
+        <div style={optionStyle}>
+          <p>Aankomst:</p>
           <DateInput
             compact
             value={valueToLocalDate(form.arrivalISO)}
@@ -57,17 +57,17 @@ const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
               handleChange({ arrivalISO: iso });
             }}
           />
-        </p>
+        </div>
 
-        <p>
-          Status:
+        <div style={optionStyle}>
+          <p>Status:</p>
           <Dropdown
             value={form.status}
             onChange={(e) => handleChange({ status: e.target.value })}
             options={STATUS_ARRAY.map((label, i) => ({ value: i, label }))}
             placeholder="-- Kies status --"
           />
-        </p>
+        </div>
 
         <div className="button-row">
           <Button label="Annuleren" onClick={onClose} variant="info" />

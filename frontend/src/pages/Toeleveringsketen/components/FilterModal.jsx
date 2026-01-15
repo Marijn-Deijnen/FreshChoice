@@ -15,31 +15,33 @@ const FilterModal = ({ open, onClose, initialValues = {}, onApply }) => {
   const [dateFrom, setDateFrom] = useState(initialValues.dateFrom || "");
   const [dateTo, setDateTo] = useState(initialValues.dateTo || "");
 
+  const optionStyle = { display: "flex", alignItems: "center", gap: 10 };
+
   return (
     <Modal open={open} onClose={onClose}>
       <div className="container">
         <h2>Filter</h2>
 
-        <p>
-          Leverancier:
+        <div style={optionStyle}>
+          <p>Leverancier:</p>
           <Textbox
             value={leverancier}
             placeholder="Leverancier"
             onChange={(e) => setLeverancier(e.target.value)}
           />
-        </p>
+        </div>
 
-        <p>
-          Inhoud:
+        <div style={optionStyle}>
+          <p>Inhoud:</p>
           <Textbox
             value={inhoud}
             placeholder="Inhoud"
             onChange={(e) => setInhoud(e.target.value)}
           />
-        </p>
+        </div>
 
-        <p>
-          Status:
+        <div style={optionStyle}>
+          <p>Status:</p>
           <Dropdown
             value={status}
             onChange={(e) => setStatus(e.target.value)}
@@ -47,25 +49,25 @@ const FilterModal = ({ open, onClose, initialValues = {}, onApply }) => {
             placeholder="-- Alle --"
             compact
           />
-        </p>
+        </div>
 
-        <p>
-          Datum van:
+        <div style={optionStyle}>
+          <p>Datum van:</p>
           <DateInput
             compact
             value={dateFrom}
             onChange={(e) => setDateFrom(e.target.value)}
           />
-        </p>
+        </div>
 
-        <p>
-          Datum tot:
+        <div style={optionStyle}>
+          <p>Datum tot:</p>
           <DateInput
             compact
             value={dateTo}
             onChange={(e) => setDateTo(e.target.value)}
           />
-        </p>
+        </div>
 
         <div className="button-row">
           <Button label="Annuleren" onClick={onClose} variant="info" />
