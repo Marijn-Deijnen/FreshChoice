@@ -17,7 +17,7 @@ const Voorraad = () => {
   useEffect(() => {
     (async () => {
       const result = await voorraadService.getAllProducts();
-      setProducts(result.data);
+      setProducts(result);
     })();
   }, [refreshTrigger]);
 

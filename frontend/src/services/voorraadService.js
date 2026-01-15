@@ -1,16 +1,18 @@
 import axios from "axios";
 
 const getAllProducts = async () => {
-  const products = await axios.get("/api/product");
-  return products;
+  const response = await axios.get("/api/product");
+  return response.data;
 };
 
 const updateProduct = async (barcode, naam, prijs, sku, voorraad_aantal) => {
-  await axios.put(`/api/product/${barcode}`, {
+  const response = await axios.put(`/api/product/${barcode}`, {
     naam,
     prijs,
+    sku,
     voorraad_aantal,
   });
+  return response.data;
 };
 
 export default { getAllProducts, updateProduct };
