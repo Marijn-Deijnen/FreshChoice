@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import voorraadService from "../services/voorraadService";
 import Button from "../components/Button";
 import SearchBox from "../components/SearchBox";
-import Separator from "../components/Separator";
-import Logo from "../components/Logo";
+import Dropdown from "../components/Dropdown";
 import Table from "../components/Table";
 import Textbox from "../components/TextBox";
 import NumberBox from "../components/NumberBox";
 import Modal from "../components/Modal";
 import "./index.css";
+import { MUTATIE_TYPE_ARRAY } from "../constants/mutatie_type";
 
 const Voorraad = () => {
   const [products, setProducts] = useState([]);
@@ -28,6 +28,9 @@ const Voorraad = () => {
   const [selectedBarcode, setSelectedBarcode] = useState("");
   const [selectedSku, setSelectedSku] = useState("");
   const [selectedVoorraad, setSelectedVoorraad] = useState("");
+  const [isMutatie, setIsMutatie] = useState(false);
+  const [werknemerNaam, setWerknemerNaam] = useState(undefined);
+  const [mutatieType, setMutatieType] = useState(undefined);
 
   const handleEdit = (product, prijs, barcode, sku, voorraad) => {
     setSelectedProduct(product);
@@ -51,12 +54,16 @@ const Voorraad = () => {
 
   const handleSave = async () => {
     setIsModalOpen(false);
-    await voorraadService.updateProduct(
-      selectedBarcode,
-      selectedProduct,
-      selectedPrijs,
-      selectedSku,
-      selectedVoorraad,
+    await voorraadService.updateProduct({
+      barcode: selectedBarcode,
+      naam: selectedProduct,
+      prijs: selectedPrijs,
+      sku: selectedSku,
+      voorraad_aantal: selectedVoorraad,
+      uitgevoerd_door: isMutatie && werknemerNaam,
+      type: isMutatie && mutatieType
+    }
+
     );
     setRefreshTrigger(!refreshTrigger);
   };
@@ -141,9 +148,36 @@ const Voorraad = () => {
             Voorraad:{" "}
             <NumberBox
               value={selectedVoorraad}
-              onChange={(e) => setSelectedVoorraad(e.target.value)}
+              onChange={(e) => {
+                setSelectedVoorraad(e.target.value);
+                setIsMutatie(true);
+                setWerknemerNaam("");
+                setMutatieType(3);
+              }}
             />
           </p>
+          {isMutatie && (
+            <>
+              <p>
+                Naam Werknemer:{" "}
+                <Textbox
+                  value={werknemerNaam}
+                  onChange={(e) => setWerknemerNaam(e.target.value)}
+                />
+              </p>
+              <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                <p>Mutatietype: </p>
+                <Dropdown
+                  value={mutatieType}
+                  onChange={(e) => setMutatieType(e.target.value)}
+                  options={MUTATIE_TYPE_ARRAY.map((label, value) => ({
+                    value,
+                    label,
+                  }))}
+                />
+              </div>
+            </>
+          )}
           <p>
             <Button label="Annuleren" onClick={() => setIsModalOpen(false)} />
             <Button label="Opslaan" onClick={handleSave} />
