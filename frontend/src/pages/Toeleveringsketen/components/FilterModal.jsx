@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "../../../components/Modal2";
 import Textbox from "../../../components/TextBox";
 import Dropdown from "../../../components/Dropdown";
@@ -14,14 +14,6 @@ const FilterModal = ({ open, onClose, initialValues = {}, onApply }) => {
   const [status, setStatus] = useState(initialValues.status ?? "");
   const [dateFrom, setDateFrom] = useState(initialValues.dateFrom || "");
   const [dateTo, setDateTo] = useState(initialValues.dateTo || "");
-
-  useEffect(() => {
-    setLeverancier(initialValues.leverancier || "");
-    setInhoud(initialValues.inhoud || "");
-    setStatus(initialValues.status ?? "");
-    setDateFrom(initialValues.dateFrom || "");
-    setDateTo(initialValues.dateTo || "");
-  }, [initialValues, open]);
 
   return (
     <Modal open={open} onClose={onClose}>

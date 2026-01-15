@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "../../../components/Modal2";
 import Textbox from "../../../components/TextBox";
 import Dropdown from "../../../components/Dropdown";
@@ -9,27 +9,17 @@ import { valueToLocalDate, localDateToStartISO } from "../../../utils/dates";
 
 const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
   const [form, setForm] = useState({
-    id: undefined,
-    leverancier: "",
-    inhoud: "",
-    arrivalISO: "",
-    status: 0,
+    id: initialValues.id,
+    leverancier: initialValues.leverancier || "",
+    inhoud: initialValues.inhoud || "",
+    arrivalISO: initialValues.arrivalISO || initialValues.arrival || "",
+    status: initialValues.status ?? 0,
   });
-
-  useEffect(() => {
-    setForm({
-      id: initialValues.id,
-      leverancier: initialValues.leverancier || "",
-      inhoud: initialValues.inhoud || "",
-      arrivalISO: initialValues.arrivalISO || initialValues.arrival || "",
-      status: initialValues.status ?? 0,
-    });
-  }, [initialValues, open]);
 
   const handleChange = (patch) => setForm((f) => ({ ...f, ...patch }));
 
   const handleSave = () => {
-    // TODO: Save functie zodra die gemaakt is
+    onSave();
   };
 
   return (

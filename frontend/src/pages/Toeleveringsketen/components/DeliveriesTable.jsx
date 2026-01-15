@@ -1,4 +1,3 @@
-import React from "react";
 import Table from "../../../components/Table";
 import { formatArrival } from "../../../utils/dates";
 import { getStatusLabel } from "../../../constants/status";
@@ -96,7 +95,7 @@ const DeliveriesTable = ({
                       "Weet je zeker dat je deze levering wilt verwijderen? Dit kan niet ongedaan gemaakt worden.",
                     );
                     if (confirm) {
-                      // TODO: Delete de record zodra die functie gemaakt is
+                      onDelete(row);
                     }
                   }}
                   style={{
