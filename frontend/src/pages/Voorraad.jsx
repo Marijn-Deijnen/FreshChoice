@@ -10,7 +10,7 @@ import NumberBox from "../components/NumberBox";
 import Modal from "../components/Modal";
 import "./index.css";
 
-const Voorraad = ({ setPage }) => {
+const Voorraad = () => {
   const [products, setProducts] = useState([]);
   const [refreshTrigger, setRefreshTrigger] = useState(false);
 
@@ -63,13 +63,7 @@ const Voorraad = ({ setPage }) => {
 
   return (
     <div className="container">
-      <Logo />
-      <p>
-        <Button onClick={() => setPage("home")} label="Home" />
-        <Button onClick={() => setPage("levering")} label="Toeleveringsketen" />
-        <Button onClick={() => setPage("voorraad")} label="Voorraadbeheer" />
-      </p>
-      <Separator variant="vertical" />
+      <h2>Voorraadbeheer</h2>
       <SearchBox
         size="big"
         value={searchValue}

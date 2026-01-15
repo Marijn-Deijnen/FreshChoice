@@ -1,20 +1,12 @@
-import Button from "../components/Button";
-import Separator from "../components/Separator";
-import Logo from "../components/Logo";
-import Logo from "../components/Logo";
 import "./index.css";
 
-const Home = ({ setPage }) => {
+const Home = () => {
   return (
-    <div className="container">
-      <Logo />
-      <p>
-        <Button onClick={() => setPage("home")} label="Home" />
-        <Button onClick={() => setPage("levering")} label="Toeleveringsketen" />
-        <Button onClick={() => setPage("voorraad")} label="Voorraadbeheer" />
-      </p>
-      <Separator />
-    </div>
+    <>
+      <div className="container">
+        <h2>Welkom bij FreshChoice!</h2>
+      </div>
+    </>
   );
 };
 

@@ -15,7 +15,7 @@ import {
 } from "../../utils/dates";
 import useLeveringen from "./hooks/useLeveringen";
 
-const Levering = ({ setPage }) => {
+const Levering = () => {
   const [isModalsOpen, setIsModalsOpen] = useState({
     editOpen: false,
     filterOpen: false,
@@ -158,9 +158,7 @@ const Levering = ({ setPage }) => {
 
   return (
     <div className="container">
-      <Logo />
-      <h1>Toeleveringsketen</h1>
-      <Separator variant="vertical" />
+      <h2>Toeleveringsketen</h2>
 
       <Toolbar
         textValue={search}
@@ -168,7 +166,6 @@ const Levering = ({ setPage }) => {
           setSearch(e.target.value);
           setHideTodayButton(false);
         }}
-        onBack={() => setPage("home")}
         onToday={() => {
           setShowTodayOnly(true);
           setHideTodayButton(true);

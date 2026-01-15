@@ -19,6 +19,10 @@
     width: 100px;
 }
 
+.button.smedium {
+    width: 130px;
+}
+
 .button.medium {
     width: 200px;
     margin-left: 20px;

@@ -5,7 +5,6 @@ import SearchBox from "./SearchBox";
 const Toolbar = ({
   textValue,
   onTextChange,
-  onBack,
   onToday,
   hideTodayButton = true,
   onNew,
@@ -23,18 +22,27 @@ const Toolbar = ({
         />
       </div>
       <div className="toolbar-actions">
-        <Button onClick={onBack} size="small" label="Terug" variant="default" />
         {!hideTodayButton && (
           <Button
             onClick={onToday}
-            size="small"
+            size="smedium"
             label="Vandaag"
             variant="info"
           />
         )}
-        <Button onClick={onNew} size="small" label="Nieuw" variant="success" />
-        <Button onClick={onFilter} size="small" label="Filter" variant="info" />
-        <Button onClick={onReset} size="small" label="Reset" variant="error" />
+        <Button onClick={onNew} size="smedium" label="Nieuw" />
+        <Button
+          onClick={onFilter}
+          size="smedium"
+          label="Filter"
+          variant="info"
+        />
+        <Button
+          onClick={onReset}
+          size="smedium"
+          label="Reset Filters"
+          variant="error"
+        />
       </div>
     </div>
   );
