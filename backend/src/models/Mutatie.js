@@ -23,6 +23,9 @@ Mutatie.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    uitgevoerd_door: {
+      type: DataTypes.STRING(255),
+    },
   },
   {
     sequelize,

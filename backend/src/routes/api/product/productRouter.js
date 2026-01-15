@@ -1,12 +1,12 @@
 import express from "express";
 import Product from "../../../models/Product.js";
+import Mutatie from "../../../models/Mutatie.js";
 
 const productRouter = express.Router();
 
 productRouter.use(express.json());
 
 productRouter.post("/", async (req, res) => {
-  console.log(req.body);
   const { barcode, naam, sku, prijs, voorraad_aantal } = req.body;
 
   const existing = await Product.findOne({ where: { naam } });
@@ -43,15 +43,25 @@ productRouter.get("/:barcode", async (req, res) => {
 
 productRouter.put("/:barcode", async (req, res) => {
   const { barcode } = req.params;
-  const { naam, prijs, voorraad_aantal } = req.body;
+  const { naam, sku, prijs, voorraad_aantal, uitgevoerd_door, type } = req.body;
 
   const product = await Product.findByPk(barcode);
   if (!product) {
     return res.status(404).json({ error: "Product niet gevonden" });
   }
 
+  if (voorraad_aantal && voorraad_aantal !== product.voorraad_aantal) {
+    await Mutatie.create({
+      barcode,
+      type,
+      hoeveelheid: voorraad_aantal - product.voorraad_aantal,
+      uitgevoerd_door,
+    });
+  }
+
   await product.update({
     naam: naam ?? product.naam,
+    sku: sku ?? product.sku,
     prijs: prijs ?? product.prijs,
     voorraad_aantal: voorraad_aantal ?? product.voorraad_aantal,
   });
