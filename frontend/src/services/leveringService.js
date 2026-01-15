@@ -3,6 +3,9 @@ import axios from "axios";
 const getAllLeveringen = async () => {
   const response = await axios.get("/api/levering");
   return response.data.map((levering) => {
+    levering.id = levering.levering_id;
+    delete levering.levering_id;
+
     levering.arrival = levering.aankomst;
     delete levering.aankomst;
 
@@ -22,6 +25,9 @@ const createNewLevering = async ({ leverancier, inhoud, arrival, status }) => {
   });
 
   const newLevering = response.data;
+
+  newLevering.id = newLevering.levering_id;
+  delete newLevering.levering_id;
 
   newLevering.arrival = newLevering.aankomst;
   delete newLevering.aankomst;
