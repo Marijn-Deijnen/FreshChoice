@@ -85,7 +85,7 @@ const Voorraad = () => {
 
         <tbody>
           {sortedProducts.map((row) => (
-            <tr>
+            <tr key={row.barcode}>
               <td>{row.naam}</td>
               <td>{row.prijs}</td>
               <td>{row.barcode}</td>
