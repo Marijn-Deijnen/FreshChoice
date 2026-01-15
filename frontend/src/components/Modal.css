@@ -7,6 +7,7 @@
     justify-items: center;
     width: 80%;
 }
+
 .modal-content{
     background: #fff;
     align-items: center;
@@ -20,14 +21,17 @@
     overflow: auto;
     text-align: left;
 }
+
 .children{
     left: 40%;
     
     
 }
+
 .modal-knop{
     margin-left: 20px;
 }
+
 .editbutton{
     width: 20px;
     cursor: pointer;

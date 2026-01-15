@@ -1,6 +1,7 @@
 import Button from "../components/Button";
 import Separator from "../components/Separator";
 import Logo from "../components/Logo";
+import Logo from "../components/Logo";
 import "./index.css";
 
 const Home = ({ setPage }) => {
