@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "../../../components/Modal2";
+import Modal from "../../../components/Modal";
 import Textbox from "../../../components/TextBox";
 import Dropdown from "../../../components/Dropdown";
 import DateInput from "../../../components/DateInput";
