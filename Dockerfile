@@ -4,7 +4,7 @@ FROM node:${NODE_VERSION}-alpine AS frontend-build
 
 WORKDIR /frontend
 
-COPY frontend/package*.json .
+COPY frontend/package*.json ./
 RUN npm ci
 
 COPY frontend/ .
@@ -15,7 +15,7 @@ FROM node:${NODE_VERSION}-alpine AS backend-build
 
 WORKDIR /backend
 
-COPY backend/package*.json .
+COPY backend/package*.json ./
 RUN npm ci
 
 COPY backend/ .
