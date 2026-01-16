@@ -28,16 +28,20 @@ const Voorraad = () => {
   const [selectedBarcode, setSelectedBarcode] = useState("");
   const [selectedSku, setSelectedSku] = useState("");
   const [selectedVoorraad, setSelectedVoorraad] = useState("");
-  const [isMutatie, setIsMutatie] = useState(false);
-  const [werknemerNaam, setWerknemerNaam] = useState(undefined);
-  const [mutatieType, setMutatieType] = useState(undefined);
+  const [initialVoorraad, setInitialVoorraad] = useState("");
+
+  const isMutatie = selectedVoorraad !== initialVoorraad;
+  const mutatie = Number(selectedVoorraad) - initialVoorraad;
+  const [werknemerNaam, setWerknemerNaam] = useState("");
+  const [mutatieType, setMutatieType] = useState(3);
 
   const handleEdit = (product, prijs, barcode, sku, voorraad) => {
     setSelectedProduct(product);
     setSelectedPrijs(prijs);
     setSelectedBarcode(barcode);
     setSelectedSku(sku);
-    setSelectedVoorraad(voorraad);
+    setSelectedVoorraad(String(voorraad));
+    setInitialVoorraad(String(voorraad));
     setIsModalOpen(true);
   };
 
@@ -61,10 +65,8 @@ const Voorraad = () => {
       sku: selectedSku,
       voorraad_aantal: selectedVoorraad,
       uitgevoerd_door: isMutatie && werknemerNaam,
-      type: isMutatie && mutatieType
-    }
-
-    );
+      type: isMutatie && mutatieType,
+    });
     setRefreshTrigger(!refreshTrigger);
   };
 
@@ -148,16 +150,15 @@ const Voorraad = () => {
             Voorraad:{" "}
             <NumberBox
               value={selectedVoorraad}
-              onChange={(e) => {
-                setSelectedVoorraad(e.target.value);
-                setIsMutatie(true);
-                setWerknemerNaam("");
-                setMutatieType(3);
-              }}
+              onChange={(e) => setSelectedVoorraad(e.target.value)}
             />
           </p>
           {isMutatie && (
             <>
+              <p>
+                Mutatie: {mutatie > 0 && "+"}
+                {mutatie}
+              </p>
               <p>
                 Naam Werknemer:{" "}
                 <Textbox
