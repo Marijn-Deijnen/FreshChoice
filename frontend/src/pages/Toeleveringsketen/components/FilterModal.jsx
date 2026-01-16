@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../../../components/Modal";
 import Textbox from "../../../components/TextBox";
 import Dropdown from "../../../components/Dropdown";
@@ -14,6 +14,15 @@ const FilterModal = ({ open, onClose, initialValues = {}, onApply }) => {
   const [status, setStatus] = useState(initialValues.status ?? "");
   const [dateFrom, setDateFrom] = useState(initialValues.dateFrom || "");
   const [dateTo, setDateTo] = useState(initialValues.dateTo || "");
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLeverancier(initialValues.leverancier || "");
+    setInhoud(initialValues.inhoud || "");
+    setStatus(initialValues.status ?? "");
+    setDateFrom(initialValues.dateFrom || "");
+    setDateTo(initialValues.dateTo || "");
+  }, [initialValues, open]);
 
   const optionStyle = { display: "flex", alignItems: "center", gap: 10 };
 

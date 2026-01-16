@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../../../components/Modal";
 import Textbox from "../../../components/TextBox";
 import Dropdown from "../../../components/Dropdown";
@@ -9,12 +9,23 @@ import { valueToLocalDate, localDateToStartISO } from "../../../utils/dates";
 
 const EditModal = ({ open, onClose, initialValues = {}, onSave }) => {
   const [form, setForm] = useState({
-    id: initialValues.id,
-    leverancier: initialValues.leverancier || "",
-    inhoud: initialValues.inhoud || "",
-    arrivalISO: initialValues.arrivalISO || initialValues.arrival || "",
-    status: initialValues.status ?? 0,
+    id: undefined,
+    leverancier: "",
+    inhoud: "",
+    arrivalISO: "",
+    status: 0,
   });
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setForm({
+      id: initialValues.id,
+      leverancier: initialValues.leverancier || "",
+      inhoud: initialValues.inhoud || "",
+      arrivalISO: initialValues.arrivalISO || initialValues.arrival || "",
+      status: initialValues.status ?? 0,
+    });
+  }, [initialValues, open]);
 
   const handleChange = (patch) => setForm((f) => ({ ...f, ...patch }));
 
