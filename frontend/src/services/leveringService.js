@@ -16,11 +16,16 @@ const getAllLeveringen = async () => {
   });
 };
 
-const createNewLevering = async ({ leverancier, inhoud, arrival, status }) => {
+const createNewLevering = async ({
+  leverancier,
+  inhoud,
+  arrivalISO,
+  status,
+}) => {
   const response = await axios.post("/api/levering", {
     leverancier,
     inhoud,
-    aankomst: arrival,
+    aankomst: arrivalISO,
     status_code: status,
   });
 
