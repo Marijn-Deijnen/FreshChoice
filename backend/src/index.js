@@ -7,9 +7,9 @@ import Levering from "./models/Levering.js";
 
 const main = async () => {
   await connectToDatabase();
-  await Product.sync({ alter: true });
-  await Mutatie.sync({ alter: true });
-  await Levering.sync({ alter: true });
+  await Product.sync();
+  await Mutatie.sync();
+  await Levering.sync();
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });

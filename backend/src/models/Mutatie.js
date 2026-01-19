@@ -13,7 +13,7 @@ Mutatie.init(
     product_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: "producten", key: "barcode" },
+      references: { model: "producten", key: "product_id" },
     },
     type: {
       type: DataTypes.STRING(255),
