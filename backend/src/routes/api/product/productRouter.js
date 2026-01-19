@@ -8,17 +8,17 @@ productRouter.use(express.json());
 
 productRouter.post("/", async (req, res) => {
   console.log("POST /api/product");
-  const { barcode, naam, sku, prijs, voorraad_aantal } = req.body;
+  const { barcode: product_id, naam, sku, prijs, voorraad_aantal } = req.body;
 
   const existing = await Product.findOne({ where: { naam } });
   if (existing) {
     return res
       .status(409)
-      .json({ error: `Product bestaat al: barcode ${existing.barcode}` });
+      .json({ error: `Product bestaat al: id ${existing.product_id}` });
   }
 
   const newProduct = await Product.create({
-    barcode,
+    product_id,
     naam,
     sku,
     prijs,
@@ -33,10 +33,10 @@ productRouter.get("/", async (req, res) => {
   res.status(200).json(products);
 });
 
-productRouter.get("/:barcode", async (req, res) => {
-  console.log("GET /api/product/:barcode");
-  const { barcode } = req.params;
-  const product = await Product.findByPk(barcode);
+productRouter.get("/:id", async (req, res) => {
+  console.log("GET /api/product/:id");
+  const { id: product_id } = req.params;
+  const product = await Product.findByPk(product_id);
   if (product) {
     res.status(200).json(product);
   } else {
@@ -44,19 +44,19 @@ productRouter.get("/:barcode", async (req, res) => {
   }
 });
 
-productRouter.put("/:barcode", async (req, res) => {
-  console.log("PUT /api/product/:barcode");
-  const { barcode } = req.params;
+productRouter.put("/:id", async (req, res) => {
+  console.log("PUT /api/product/:id");
+  const { id: product_id } = req.params;
   const { naam, sku, prijs, voorraad_aantal, uitgevoerd_door, type } = req.body;
 
-  const product = await Product.findByPk(barcode);
+  const product = await Product.findByPk(product_id);
   if (!product) {
     return res.status(404).json({ error: "Product niet gevonden" });
   }
 
   if (voorraad_aantal && voorraad_aantal !== product.voorraad_aantal) {
     await Mutatie.create({
-      barcode,
+      product_id,
       type,
       hoeveelheid: voorraad_aantal - product.voorraad_aantal,
       uitgevoerd_door,
@@ -73,10 +73,10 @@ productRouter.put("/:barcode", async (req, res) => {
   res.status(200).json({ message: "Product aangepast" });
 });
 
-productRouter.delete("/:barcode", async (req, res) => {
-  console.log("DELETE /api/product/:barcode");
-  const { barcode } = req.params;
-  const deleted = await Product.destroy({ where: { barcode } });
+productRouter.delete("/:id", async (req, res) => {
+  console.log("DELETE /api/product/:id");
+  const { id: product_id } = req.params;
+  const deleted = await Product.destroy({ where: { product_id } });
   if (deleted) {
     res.status(200).json({ message: "Product verwijderd" });
   } else {
