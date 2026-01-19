@@ -7,6 +7,7 @@ const productRouter = express.Router();
 productRouter.use(express.json());
 
 productRouter.post("/", async (req, res) => {
+  console.log("POST /api/product");
   const { barcode, naam, sku, prijs, voorraad_aantal } = req.body;
 
   const existing = await Product.findOne({ where: { naam } });
@@ -27,11 +28,13 @@ productRouter.post("/", async (req, res) => {
 });
 
 productRouter.get("/", async (req, res) => {
+  console.log("GET /api/product");
   const products = await Product.findAll();
   res.status(200).json(products);
 });
 
 productRouter.get("/:barcode", async (req, res) => {
+  console.log("GET /api/product/:barcode");
   const { barcode } = req.params;
   const product = await Product.findByPk(barcode);
   if (product) {
@@ -42,6 +45,7 @@ productRouter.get("/:barcode", async (req, res) => {
 });
 
 productRouter.put("/:barcode", async (req, res) => {
+  console.log("PUT /api/product/:barcode");
   const { barcode } = req.params;
   const { naam, sku, prijs, voorraad_aantal, uitgevoerd_door, type } = req.body;
 
@@ -70,6 +74,7 @@ productRouter.put("/:barcode", async (req, res) => {
 });
 
 productRouter.delete("/:barcode", async (req, res) => {
+  console.log("DELETE /api/product/:barcode");
   const { barcode } = req.params;
   const deleted = await Product.destroy({ where: { barcode } });
   if (deleted) {

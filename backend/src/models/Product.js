@@ -5,7 +5,7 @@ class Product extends Model {}
 
 Product.init(
   {
-    barcode: {
+    product_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,

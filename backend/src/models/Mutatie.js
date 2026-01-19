@@ -10,7 +10,7 @@ Mutatie.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    barcode: {
+    product_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: { model: "producten", key: "barcode" },
@@ -25,6 +25,9 @@ Mutatie.init(
     },
     uitgevoerd_door: {
       type: DataTypes.STRING(255),
+    },
+    mutatie_actie_id: {
+      type: DataTypes.INTEGER,
     },
   },
   {
